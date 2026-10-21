@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // strategy message builder (submit page)
   const form = document.querySelector("#builder");
   if (form) {
-    const out = document.querySelector("#out"), mail = document.querySelector("#mail");
+    const out = document.querySelector("#out");
     const build = () => {
       const f = Object.fromEntries(new FormData(form).entries());
       const lines = [
@@ -42,15 +42,36 @@ document.addEventListener("DOMContentLoaded", () => {
       ];
       if (f.notes) lines.push(`Notes: ${f.notes}`);
       out.textContent = lines.join("\n");
-      const to = "nocurvefit@proton.me", su = encodeURIComponent("Strategy test: " + (f.name || "my strategy")), body = encodeURIComponent(out.textContent);
-      mail.href = `mailto:${to}?subject=${su}&body=${body}`;
-      document.querySelector("#gmail").href = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${body}`;
-      document.querySelector("#outlook").href = `https://outlook.live.com/mail/0/deeplink/compose?to=${to}&subject=${su}&body=${body}`;
+      if (f.contact) out.textContent += `\nSend the report to: ${f.contact}`;
     };
     form.addEventListener("input", build);
     build();
     const copy = (btn, text, label) => navigator.clipboard.writeText(text).then(() => { btn.textContent = "Copied"; setTimeout(() => btn.textContent = label, 1500); });
     document.querySelector("#copy").addEventListener("click", e => copy(e.target, out.textContent, "Copy text"));
-    document.querySelector("#copymail").addEventListener("click", e => copy(e.target, "nocurvefit@proton.me", "Copy address"));
+    // "Send strategy": posted straight to our inbox through FormSubmit (no email app needed on the visitor's side)
+    const send = document.querySelector("#send"), status = document.querySelector("#status");
+    send.addEventListener("click", async () => {
+      const f = Object.fromEntries(new FormData(form).entries());
+      if (f._honey) return;
+      if (!f.entry || !f.exit) { status.innerHTML = '<span class="dn">Please fill in the entry and exit rule.</span>'; return; }
+      if (!f.contact) { status.innerHTML = '<span class="dn">Please tell us where to send your report.</span>'; return; }
+      send.disabled = true; send.textContent = "Sending..."; status.textContent = "";
+      const payload = { _subject: "Strategy test: " + (f.name || "website form"), _template: "box", _captcha: "false",
+        strategy: f.name, entry: f.entry, exit: f.exit, stops: f.stops, chart: f.tf, direction: f.dir, coins: f.coins, notes: f.notes,
+        send_report_to: f.contact, full_message: out.textContent };
+      if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.contact)) payload._replyto = f.contact;
+      try {
+        const r = await fetch("https://formsubmit.co/ajax/nocurvefit@proton.me", { method: "POST",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) });
+        const j = await r.json();
+        if (r.ok && String(j.success) === "true") {
+          status.innerHTML = '<span class="up">Sent. Your report will be sent to ' + f.contact.replace(/[<>&"]/g, "") + " within 24 hours.</span>";
+          send.textContent = "Sent";
+        } else { throw new Error(j.message || "failed"); }
+      } catch (err) {
+        status.innerHTML = '<span class="dn">Could not send right now. Copy the text and DM us on X instead.</span>';
+        send.disabled = false; send.textContent = "Send strategy";
+      }
+    });
   }
 });
