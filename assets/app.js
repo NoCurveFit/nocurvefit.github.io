@@ -42,12 +42,15 @@ document.addEventListener("DOMContentLoaded", () => {
       ];
       if (f.notes) lines.push(`Notes: ${f.notes}`);
       out.textContent = lines.join("\n");
-      mail.href = "mailto:nocurvefit@proton.me?subject=" + encodeURIComponent("Strategy test: " + (f.name || "my strategy")) + "&body=" + encodeURIComponent(out.textContent);
+      const to = "nocurvefit@proton.me", su = encodeURIComponent("Strategy test: " + (f.name || "my strategy")), body = encodeURIComponent(out.textContent);
+      mail.href = `mailto:${to}?subject=${su}&body=${body}`;
+      document.querySelector("#gmail").href = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${body}`;
+      document.querySelector("#outlook").href = `https://outlook.live.com/mail/0/deeplink/compose?to=${to}&subject=${su}&body=${body}`;
     };
     form.addEventListener("input", build);
     build();
-    document.querySelector("#copy").addEventListener("click", e => {
-      navigator.clipboard.writeText(out.textContent).then(() => { e.target.textContent = "Copied"; setTimeout(() => e.target.textContent = "Copy text", 1500); });
-    });
+    const copy = (btn, text, label) => navigator.clipboard.writeText(text).then(() => { btn.textContent = "Copied"; setTimeout(() => btn.textContent = label, 1500); });
+    document.querySelector("#copy").addEventListener("click", e => copy(e.target, out.textContent, "Copy text"));
+    document.querySelector("#copymail").addEventListener("click", e => copy(e.target, "nocurvefit@proton.me", "Copy address"));
   }
 });
