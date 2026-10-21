@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         send_report_to: f.contact, full_message: out.textContent };
       if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.contact)) payload._replyto = f.contact;
       try {
-        const r = await fetch("https://formsubmit.co/ajax/nocurvefit@proton.me", { method: "POST",
+        const r = await fetch("https://formsubmit.co/ajax/0159a36c269a53a340b0d55b1442a7b8", { method: "POST",
           headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(payload) });
         const j = await r.json();
         if (r.ok && String(j.success) === "true") {
