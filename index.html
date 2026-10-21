@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NoCurveFit · Your strategy, tested honestly</title>
+<meta name="description" content="Send your trading strategy. Get a one-page report in 24 hours: real costs, 10 coins, first months vs last months, and a straight verdict.">
+<meta property="og:title" content="NoCurveFit · Your strategy, tested honestly">
+<meta property="og:description" content="Real costs. Many coins. Nothing tuned to fit. A one-page report in 24 hours.">
+<meta property="og:image" content="https://nocurvefit.github.io/assets/og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@NoCurveFit">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1220;--bg2:#111B30;--card:#131E36;--line:#22304F;--text:#F8FAFC;--muted:#94A3B8;--accent:#2BE08A;--red:#F87171;--amber:#FBBF24}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:0;z-index:10;background:rgba(11,18,32,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.01em}
+.brand svg{width:26px;height:26px;color:var(--text)}
+.links{display:flex;gap:28px;align-items:center;font-size:14px;color:var(--muted)}
+.links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-weight:600;font-size:15px;transition:.15s}
+.btn-primary{background:var(--accent);color:#06210F}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost{border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:#3A4C74}
+.links .btn{padding:8px 14px;font-size:14px;color:#06210F}
+.hero{position:relative;overflow:hidden;padding:110px 0 90px;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%)}
+.hero .art{position:absolute;right:-2%;top:40px;width:52%;max-width:640px;height:auto;pointer-events:none;opacity:.95}
+.eyebrow{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);background:rgba(43,224,138,.1);border:1px solid rgba(43,224,138,.25);padding:5px 12px;border-radius:999px;margin-bottom:22px}
+h1{font-size:clamp(40px,6vw,68px);line-height:1.05;letter-spacing:-.03em;font-weight:700;max-width:640px}
+.lead{margin-top:20px;font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:620px}
+.cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:70px;position:relative;z-index:1}
+.stat{background:var(--bg2);padding:22px 24px}
+.stat b{display:block;font-size:30px;letter-spacing:-.02em}
+.stat span{color:var(--muted);font-size:14px}
+section{padding:90px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;line-height:1.15;font-weight:700}
+.sub{color:var(--muted);margin-top:12px;max-width:640px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px}
+.card .n{width:34px;height:34px;border-radius:9px;background:rgba(43,224,138,.12);color:var(--accent);display:grid;place-items:center;font-weight:700;margin-bottom:16px}
+.card h3{font-size:18px;margin-bottom:8px;letter-spacing:-.01em}
+.card p{color:var(--muted);font-size:15px}
+.shot{margin-top:40px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.shot img{display:block;width:100%;height:auto}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.caption{color:var(--muted);font-size:14px;margin-top:10px}
+.report{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;margin-top:40px}
+.report .shot{margin-top:0;max-width:440px;justify-self:center}
+ul.check{list-style:none;display:grid;gap:12px;margin-top:22px}
+ul.check li{padding-left:30px;position:relative}
+ul.check li:before{content:"";position:absolute;left:0;top:7px;width:16px;height:9px;border-left:2.5px solid var(--accent);border-bottom:2.5px solid var(--accent);transform:rotate(-45deg)}
+.verdicts{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.v{font-weight:700;font-size:13px;padding:6px 12px;border-radius:8px;letter-spacing:.02em}
+.v.ok{background:rgba(43,224,138,.12);color:var(--accent)}.v.sh{background:rgba(251,191,36,.12);color:var(--amber)}.v.no{background:rgba(248,113,113,.12);color:var(--red)}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+.price .card{padding:30px}
+.price .amt{font-size:44px;font-weight:700;letter-spacing:-.03em;margin:10px 0 4px}
+.price .tag{font-size:13px;font-weight:600;color:var(--accent)}
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px}
+.trust .card h3{font-size:16px}
+details{border-bottom:1px solid var(--line);padding:20px 0}
+details summary{cursor:pointer;font-weight:600;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:20px}
+details summary:after{content:"+";color:var(--muted);font-weight:400;font-size:22px;line-height:1}
+details[open] summary:after{content:"−"}
+details p{color:var(--muted);margin-top:10px;max-width:760px}
+.faq{margin-top:30px;border-top:1px solid var(--line)}
+.final{text-align:center}
+.final .cta{justify-content:center}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
+footer .row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a:hover{color:var(--text)}
+@media (max-width:860px){
+ .links a:not(.btn){display:none}
+ .grid3,.trust,.price,.two,.report{grid-template-columns:1fr}
+ .stats{grid-template-columns:1fr}
+ .hero{padding:70px 0 60px}
+ .hero .art{width:90%;right:-30%;top:10px;opacity:.35}
+ section{padding:64px 0}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap"><nav>
+  <a class="brand" href="#"><svg viewBox="15 15 70 70" aria-hidden="true"><rect x="20" y="20" width="17" height="60" fill="currentColor"/><rect x="63" y="20" width="17" height="60" fill="currentColor"/><polygon points="20,20 37,20 80,80 63,80" fill="#2BE08A"/></svg>NoCurveFit</a>
+  <div class="links"><a href="#how">How it works</a><a href="#results">Results</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+   <a class="btn btn-primary" href="#send">Send your strategy</a></div>
+ </nav></div>
+</header>
+
+<main>
+<div class="hero">
+ <img class="art" src="assets/hero.png" alt="">
+ <div class="wrap" style="position:relative;z-index:1">
+  <span class="eyebrow">Launch offer: the first 5 tests are free</span>
+  <h1>Your strategy, tested honestly.</h1>
+  <p class="lead">Send us your trading rule in plain words. Within 24 hours you get a one-page report: the result after real costs, on 10 coins, with a straight verdict.</p>
+  <div class="cta"><a class="btn btn-primary" href="#send">Send your strategy</a><a class="btn btn-ghost" href="#results">See real results</a></div>
+  <div class="stats">
+   <div class="stat"><b>18</b><span>popular strategies tested in public</span></div>
+   <div class="stat"><b>14 of 18</b><span>lost money after real costs</span></div>
+   <div class="stat"><b>0</b><span>settings tuned to make a result look good</span></div>
+  </div>
+ </div>
+</div>
+
+<section id="how"><div class="wrap">
+ <h2>How it works</h2>
+ <p class="sub">Most backtests are tuned until they fit the past. That's called curve fitting, and it's why strategies that look perfect on a chart lose money live. We test the other way.</p>
+ <div class="grid3">
+  <div class="card"><div class="n">1</div><h3>Send your rule</h3><p>In plain words: when you enter, when you exit, stop-loss and target, which coins, which chart. A TradingView script is fine too.</p></div>
+  <div class="card"><div class="n">2</div><h3>We test it honestly</h3><p>Hourly data from Nov 2025 to Oct 2026, 10 big coins, real spreads and funding, no peeking at the future. Your settings, never tuned to our data.</p></div>
+  <div class="card"><div class="n">3</div><h3>You get the report</h3><p>One page within 24 hours, with a clear verdict and the reason. Want to try one change? We test it for free.</p></div>
+ </div>
+</div></section>
+
+<section id="results"><div class="wrap">
+ <h2>Real results, in public</h2>
+ <p class="sub">We tested the strategies everyone teaches, with textbook settings and nothing tuned. Most of them lost money. Even "just holding the coins" lost 13.9% over the same months.</p>
+ <div class="shot"><img src="assets/00_summary.png" alt="10 famous trading strategies tested: 8 lost money after real costs" loading="lazy"></div>
+ <p class="caption">10 famous strategies (RSI, MACD, Bollinger, Supertrend, Turtle and more): 8 lost money after costs.</p>
+ <div class="shot"><img src="assets/v00_summary.png" alt="8 viral YouTube and TradingView strategies tested: 6 lost money" loading="lazy"></div>
+ <p class="caption">8 strategies that went viral on YouTube and TradingView: 6 lost money.</p>
+</div></section>
+
+<section><div class="wrap">
+ <div class="report">
+  <div>
+   <h2>What's in your report</h2>
+   <ul class="check">
+    <li>The result after real costs, and the same rule with no costs, so you see what fees do</li>
+    <li>The same rule on a normal 0.05%-fee exchange</li>
+    <li>Your rule vs. just buying and holding</li>
+    <li>The worst drop from a high (how much pain to expect)</li>
+    <li>First 6 months vs. last 5 months: does it last, or was it luck?</li>
+    <li>How many of the 10 coins it made money on</li>
+    <li>Number of trades, win rate, months that made money</li>
+   </ul>
+   <div class="verdicts"><span class="v ok">WORKS</span><span class="v sh">SHAKY</span><span class="v no">DOESN'T WORK</span></div>
+  </div>
+  <div class="shot"><img src="assets/v05_ut_bot.png" alt="Example one-page report" loading="lazy"></div>
+ </div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+ <h2>Pricing</h2>
+ <p class="sub">Simple. No account, no subscription, no wallet connection.</p>
+ <div class="price">
+  <div class="card"><span class="tag">LAUNCH OFFER</span><div class="amt">Free</div><p style="color:var(--muted)">The first 5 strategies we receive. Same full report.</p></div>
+  <div class="card"><span class="tag">AFTER THAT</span><div class="amt">$15</div><p style="color:var(--muted)">Per strategy, paid in USDC. If we can't test your rule, you don't pay.</p></div>
+ </div>
+</div></section>
+
+<section><div class="wrap">
+ <h2>Our rules</h2>
+ <p class="sub">Crypto is full of scams. So here is what we will never do.</p>
+ <div class="trust">
+  <div class="card"><h3>Never your keys</h3><p>We never ask for API keys, passwords, seed phrases or exchange logins. Anyone who does is not us.</p></div>
+  <div class="card"><h3>Never your money</h3><p>We don't trade for you, manage funds or hold deposits. We test rules. That's it.</p></div>
+  <div class="card"><h3>Never a promise</h3><p>A backtest is not a promise of future profit, and we never sell it as one.</p></div>
+  <div class="card"><h3>Never tuned</h3><p>We don't adjust your settings until the chart looks good. You get the honest number.</p></div>
+ </div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+ <h2>Questions</h2>
+ <div class="faq">
+  <details><summary>Which markets and charts can you test?</summary><p>By default the 10 big coins: BTC, ETH, SOL, XRP, BNB, DOGE, HYPE, LINK, AVAX and SUI. On request also other coins and the gold, silver and stock markets listed on Lighter. Charts from 1 hour and slower (1h, 4h, daily).</p></details>
+  <details><summary>What does "real costs" mean?</summary><p>Every trade pays the real price spread of that market, and positions pay or receive funding like on a perpetual exchange. We also show the same rule on a normal exchange with a 0.05% fee per side, because fees decide everything for fast strategies.</p></details>
+  <details><summary>Why is it called NoCurveFit?</summary><p>Curve fitting means tuning a rule until it matches the past perfectly. It looks amazing on a chart and usually fails on the next one. We do the opposite: your settings, many coins, and a check of whether the result holds over time.</p></details>
+  <details><summary>Can my strategy be private?</summary><p>Yes. We never publish a customer's strategy or result without asking first.</p></details>
+  <details><summary>Is this financial advice?</summary><p>No. We report what a rule would have done in the past, after costs. What you do with it is your decision.</p></details>
+ </div>
+</div></section>
+
+<section id="send" class="final"><div class="wrap">
+ <h2>Send your strategy</h2>
+ <p class="sub" style="margin-left:auto;margin-right:auto">Tell us when you enter, when you exit, which coins and which chart. You'll get your report within 24 hours.</p>
+ <div class="cta"><a class="btn btn-primary" href="https://x.com/NoCurveFit" target="_blank" rel="noopener">Message us on X</a><a class="btn btn-ghost" href="mailto:nocurvefit@proton.me?subject=Strategy%20test">nocurvefit@proton.me</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap row">
+ <span>© 2026 NoCurveFit · Backtests describe the past and are not a promise of future results. Not financial advice.</span>
+ <span><a href="https://x.com/NoCurveFit" target="_blank" rel="noopener">X @NoCurveFit</a> · <a href="mailto:nocurvefit@proton.me">Email</a></span>
+</div></footer>
+</body>
+</html>
