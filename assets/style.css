@@ -191,7 +191,7 @@ pre.out{background:var(--bg1);border:1px solid var(--line2);padding:16px;font:13
 .ctaband .wrap{display:flex;justify-content:space-between;align-items:end;gap:40px;flex-wrap:wrap}
 .ctaband h2{font-size:clamp(32px,4vw,54px);letter-spacing:-.04em;line-height:1;font-weight:800;max-width:760px}
 footer{padding:56px 0 40px;color:var(--muted);font-size:14px}
-footer .grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px}
+footer .grid{display:grid;grid-template-columns:1.4fr repeat(5,1fr);gap:32px}
 footer h4{font:500 11px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--dim);margin-bottom:14px;font-weight:500}
 footer li{list-style:none;margin:8px 0}
 footer a:hover{color:var(--text)}
